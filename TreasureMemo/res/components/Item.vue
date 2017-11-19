@@ -1,24 +1,24 @@
 <template>
     <q-card>
         <q-card-title v-show="!isEditing">
-            {{ todo.title }}
-            <span slot="subtitle">{{ todo.space }}</span>
+            {{ item.title }}
+            <span slot="subtitle">{{ item.space }}</span>
         </q-card-title>
         <q-card-main v-show="!isEditing">
-            &yen; {{ todo.price }} (数量 {{ todo.number }} )
+            &yen; {{ item.price }} (数量 {{ item.number }} )
         </q-card-main>
         <q-card-main v-show="isEditing">
-            <q-input v-model="todo.title" stack-label="Title" />
-            <q-input v-model="todo.space"" stack-label="Space" />
-            <q-input v-model="todo.price" type="number" prefix="&yen;" float-label="Price" />
-            <q-input v-model="todo.number" type="number" float-label="Number" />
+            <q-input v-model="item.title" stack-label="Title" />
+            <q-input v-model="item.space"" stack-label="Space" />
+            <q-input v-model="item.price" type="number" prefix="&yen;" float-label="Price" />
+            <q-input v-model="item.number" type="number" float-label="Number" />
         </q-card-main>
         <q-card-separator />
         <q-card-actions align="around">
-            <q-btn flat round small color="primary" v-show="!isEditing &&todo.done" disabled>
+            <q-btn flat round small color="primary" v-show="!isEditing &&item.done" disabled>
                 <q-icon name="check_box" />
             </q-btn>
-            <q-btn flat round small color="primary" v-on:click="completeTodo(todo)" v-show="!isEditing && !todo.done">
+            <q-btn flat round small color="primary" v-on:click="completeTodo(item)" v-show="!isEditing && !item.done">
                 <q-icon name="check_box_outline_blank" />
             </q-btn>
             <q-btn flat round small color="secondary" v-on:click="hideForm" v-show="isEditing">
@@ -27,7 +27,7 @@
             <q-btn flat round small color="secondary" v-on:click="showForm" v-show="!isEditing">
                 <q-icon name="edit" />
             </q-btn>
-            <q-btn flat round small color="faded" v-on:click="deleteTodo(todo)">
+            <q-btn flat round small color="faded" v-on:click="deleteTodo(item)">
                 <q-icon name="delete" />
             </q-btn>
         </q-card-actions>
@@ -36,18 +36,18 @@
 
 <script>
   export default {
-    props: ['todo'],
+    props: ['item'],
     data() {
       return {
         isEditing: false,
       };
     },
     methods: {
-      completeTodo(todo) {
-          this.$emit('complete-todo', todo);
+      completeTodo(item) {
+          this.$emit('complete-item', item);
         },
-        deleteTodo(todo) {
-          this.$emit('delete-todo', todo);
+        deleteTodo(item) {
+          this.$emit('delete-item', item);
         },
         showForm() {
           this.isEditing = true;

@@ -1,5 +1,8 @@
-node_modules/
+# Cordova Info
 platforms/
 plugins/
 www/dist/
+
+# Node
+node_modules/
 *.log

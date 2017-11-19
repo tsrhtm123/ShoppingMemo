@@ -25,7 +25,7 @@
 
 <script>
   export default {
-    name: 'createTodo',
+    name: 'createItem',
     data() {
       return {
         titleText: '',
@@ -43,14 +43,12 @@
           this.isCreating = false;
         },
         sendForm() {
-          console.log("sendForm");
-          console.log(this.priceText);
           if (this.titleText.length > 0 && this.spaceText.length > 0 && this.priceText > 0 && this.numberText > 0) {
             const title = this.titleText;
             const space = this.spaceText;
             const price = this.priceText;
             const number = this.numberText;
-            this.$emit('create-todo', {
+            this.$emit('create-item', {
               title,
               space,
               price,
